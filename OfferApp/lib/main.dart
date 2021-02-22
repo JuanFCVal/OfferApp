@@ -14,7 +14,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Tryffer',
-      initialRoute: 'login',
+      initialRoute: 'home',
       routes: getApplicationRoutes(),
     );
     //home: new BottomNavigation(),
