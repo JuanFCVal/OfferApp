@@ -19,12 +19,15 @@ class CategoriesSwiper extends StatelessWidget {
       elementos.add(card);
     }
     return CategoryPicker(
-      //selectedItemColor: Colors.white,
+      unselectedItemBorderColor: Colors.transparent,
       selectedItemTextLightThemeColor: Colors.black,
       unselectedItemColor: Colors.white,
+      selectedItemColor: Color.fromRGBO(82, 78, 255, 1),
       unselectedItemTextLightThemeColor: Colors.black26,
       items: elementos,
-      itemHeight: 40,
+      itemHeight: 35,
+      itemLabelFontSize: 16,
+      itemMargin: const EdgeInsets.only(right: 11),
     );
   }
 

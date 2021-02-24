@@ -12,70 +12,62 @@ class Home extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(77, 168, 207, 1),
-      body: HawkFabMenu(
-        icon: AnimatedIcons.menu_arrow,
-        fabColor: Colors.yellow,
-        iconColor: Colors.green,
-        items: [
-          HawkFabMenuItem(
-            label: 'Buscar',
-            ontap: () {},
-            icon: Icon(Icons.search),
-            color: Colors.red,
-            labelColor: Colors.blue,
-          ),
-          HawkFabMenuItem(
-            label: 'Mapa',
-            ontap: () {},
-            icon: Icon(Icons.map),
-            labelColor: Colors.white,
-            labelBackgroundColor: Colors.blue,
-          ),
-        ],
-        body: SingleChildScrollView(
-          child: Stack(
-            overflow: Overflow.visible,
-            children: <Widget>[
-              Column(
-                children: [
-                  Container(
-                    height: 100,
-                  ),
-                  AutoSizeText(
-                    "Recomendaciones",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontFamily: "Lato",
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Container(
-                    height: 25,
-                  ),
-                  _swiperTarjetas(),
-                  Container(
-                    height: 25,
-                  ),
-                  AutoSizeText(
-                    "Categorías",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontFamily: "Lato",
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Container(
-                    height: 10,
-                  ),
-                  _swiperCategorias(),
-                  Container(
-                    height: 50,
-                  ),
-                ],
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              Expanded(
+                child: Container(
+                  color: Color.fromRGBO(243, 243, 243, 1),
+                  //width: MediaQuery.of(context).size.width,
+                  //height: MediaQuery.of(context).size.height * 0.55,
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  color: Color.fromRGBO(128, 67, 228, 1),
+                ),
               )
             ],
+          ),
+          Container(
+            margin: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width * 0.8, top: 50),
+            child: IconButton(
+                iconSize: 34, icon: Icon(Icons.search), onPressed: () {}),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 180, left: 50),
+            child: Text(
+              "Recomendaciones",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 150,
+            ),
+            child: _swiperTarjetas(),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 90, left: 40),
+            child: _swiperCategorias(),
+          ),
+        ],
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 35, right: 25),
+        child: Container(
+          height: 60,
+          width: 60,
+          child: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: Color.fromRGBO(241, 235, 90, 1),
+            elevation: 10,
+            child: Icon(
+              Icons.map,
+              color: Color.fromRGBO(89, 214, 58, 1),
+            ),
           ),
         ),
       ),
@@ -108,9 +100,8 @@ class Home extends StatelessWidget {
           } else {
             return Center(
               child: Container(
-                margin: EdgeInsets.only(top: 100),
-                //child: CircularProgressIndicator()
-              ),
+                  margin: EdgeInsets.only(top: 100),
+                  child: CircularProgressIndicator()),
             );
           }
         });
