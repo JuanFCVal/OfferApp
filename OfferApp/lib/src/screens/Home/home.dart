@@ -2,12 +2,10 @@ import 'package:OfferApp/src/provider/categorias_provider.dart';
 import 'package:OfferApp/src/provider/ofertas_provider.dart';
 import 'package:OfferApp/src/screens/Home/widgets/CardSwipper.dart';
 import 'package:OfferApp/src/screens/Home/widgets/CategoriesSwiper.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:hawk_fab_menu/hawk_fab_menu.dart';
 
 class Home extends StatelessWidget {
-  final MoviesProvider ofertasProvider = new MoviesProvider();
+  final OfertasProvider ofertasProvider = new OfertasProvider();
   final CategoriasProvider categoriasProvider = new CategoriasProvider();
   @override
   Widget build(context) {
@@ -31,12 +29,21 @@ class Home extends StatelessWidget {
             ],
           ),
           Container(
+            //IconSearchButton
             margin: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width * 0.8, top: 50),
             child: IconButton(
                 iconSize: 34, icon: Icon(Icons.search), onPressed: () {}),
           ),
           Padding(
+            //SwipperTarjetas
+            padding: const EdgeInsets.only(
+              top: 150,
+            ),
+            child: _swiperTarjetas(),
+          ),
+          Padding(
+            //Text Category Selected
             padding: const EdgeInsets.only(top: 180, left: 50),
             child: Text(
               "Recomendaciones",
@@ -44,19 +51,14 @@ class Home extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(
-              top: 150,
-            ),
-            child: _swiperTarjetas(),
-          ),
-          Padding(
+            //SwipperCategorias
             padding: const EdgeInsets.only(top: 90, left: 40),
             child: _swiperCategorias(),
           ),
         ],
       ),
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 35, right: 25),
+        padding: const EdgeInsets.only(bottom: 25, right: 15),
         child: Container(
           height: 60,
           width: 60,
@@ -81,10 +83,8 @@ class Home extends StatelessWidget {
           if (snapshot.hasData) {
             return CategoriesSwiper(categoria: snapshot.data);
           } else {
-            return Center(
-              child: Container(
-                  margin: EdgeInsets.only(top: 100),
-                  child: CircularProgressIndicator()),
+            return Container(
+              margin: EdgeInsets.only(top: 100),
             );
           }
         });

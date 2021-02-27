@@ -11,8 +11,6 @@ class CategoriesSwiper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     for (var item in categoria) {
-      print(categoria.length);
-
       final card = CategoryPickerItem(
         value: item.getName(),
       );
@@ -28,26 +26,7 @@ class CategoriesSwiper extends StatelessWidget {
       itemHeight: 35,
       itemLabelFontSize: 16,
       itemMargin: const EdgeInsets.only(right: 11),
+      onValueChanged: (value) {},
     );
   }
-
-  /*_createBalls() {
-    for (var item in categoria) {
-      final card = Column(
-        children: [
-          Container(
-            width: 80,
-            height: 80,
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(item.getImage()),
-              child: Text("Categoria"),
-              radius: 30,
-            ),
-          )
-        ],
-      );
-      elementos.add(card);
-    }
-    return elementos;
-  }*/
 }

@@ -22,19 +22,20 @@ class Oferta {
   int repiteMensual;
   String productoIdproductos;
   String imagen;
+  String negocioID;
 
-  Oferta({
-    this.idofertas,
-    this.fechaInicio,
-    this.fechaFin,
-    this.nombre,
-    this.descripcion,
-    this.incentivo,
-    this.repiteSemanal,
-    this.repiteMensual,
-    this.productoIdproductos,
-    this.imagen,
-  });
+  Oferta(
+      {this.idofertas,
+      this.fechaInicio,
+      this.fechaFin,
+      this.nombre,
+      this.descripcion,
+      this.incentivo,
+      this.repiteSemanal,
+      this.repiteMensual,
+      this.productoIdproductos,
+      this.imagen,
+      this.negocioID});
 
   Oferta.fromJsonMap(Map<String, dynamic> json) {
     idofertas = json["idofertas"];
@@ -47,6 +48,7 @@ class Oferta {
     repiteMensual = json["repiteMensual"];
     productoIdproductos = json["producto_idproductos"];
     imagen = json["imagen"];
+    negocioID = json["negocioID"];
   }
 
   getImage() {
