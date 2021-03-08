@@ -17,78 +17,88 @@ class detalleNegocio extends StatelessWidget {
     print(index);
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _crearImagen(index),
-            _crearData(),
-            _crearOfertas(context),
-          ],
-        ),
-      ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 430, right: 15),
-        child: Container(
-          height: 60,
-          width: 60,
-          child: FloatingActionButton(
-            onPressed: () {},
-            backgroundColor: Color.fromRGBO(241, 235, 90, 1),
-            elevation: 10,
-            child: Icon(
-              Icons.directions,
-              color: Color.fromRGBO(89, 214, 58, 1),
-            ),
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  _crearData(index),
+                  _crearOfertas(context),
+                ],
+              ),
+            ],
           ),
         ),
-      ),
-    );
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(bottom: 25, right: 15),
+          child: Container(
+            height: 60,
+            width: 60,
+            child: FloatingActionButton(
+              onPressed: () {},
+              backgroundColor: Color.fromRGBO(241, 235, 90, 1),
+              elevation: 10,
+              child: Icon(
+                Icons.directions,
+                color: Color.fromRGBO(89, 214, 58, 1),
+              ),
+            ),
+          ),
+        ));
   }
 
-  _crearImagen(int index) {
+  _crearData(int index) {
     return FutureBuilder(
         future: _negociosProvider.getNegocioFromID(index),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<Negocio> snapshot) {
           if (snapshot.hasData) {
             negocio = (snapshot.data);
-            return Container(
-              height: 250,
-              width: double.infinity,
-              child: FadeInImage(
-                  placeholder: AssetImage('assets/img/loading.gif'),
-                  fit: BoxFit.cover,
-                  image: NetworkImage(snapshot.data.getImage())),
+            print(negocio.descripcion);
+            print(negocio.nombre);
+            return Column(
+              children: [
+                Container(
+                  height: 250,
+                  width: double.infinity,
+                  child: FadeInImage(
+                      placeholder: AssetImage('assets/img/loading.gif'),
+                      fit: BoxFit.cover,
+                      image: NetworkImage(snapshot.data.getImage())),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 20, right: 30),
+                  child: Container(
+                    color: Color.fromRGBO(240, 248, 255, 1),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            negocio.getNombre(),
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(negocio.getDescription(),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.normal)),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text("Ofertas",
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold)),
+                        ]),
+                  ),
+                )
+              ],
             );
           } else {
             return Center(child: CircularProgressIndicator());
           }
         });
-  }
-
-  _crearData() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 30),
-      child: Container(
-        color: Color.fromRGBO(240, 248, 255, 1),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(
-            negocio.getNombre(),
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Text(negocio.getDescription(),
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
-          SizedBox(
-            height: 15,
-          ),
-          Text("Ofertas",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-        ]),
-      ),
-    );
   }
 
   _crearOfertas(BuildContext context) {
