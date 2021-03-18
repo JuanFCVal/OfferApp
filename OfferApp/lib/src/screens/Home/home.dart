@@ -63,7 +63,9 @@ class Home extends StatelessWidget {
           height: 60,
           width: 60,
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, "mapa");
+            },
             backgroundColor: Color.fromRGBO(241, 235, 90, 1),
             elevation: 10,
             child: Icon(
