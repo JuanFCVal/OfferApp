@@ -22,18 +22,19 @@ class Negocio {
   String telefono;
   String sitioWeb;
   String representante;
+  int idCategoria;
 
-  Negocio({
-    this.idnegocio,
-    this.nombre,
-    this.descripcion,
-    this.logo,
-    this.horaApertura,
-    this.horaCierre,
-    this.telefono,
-    this.sitioWeb,
-    this.representante,
-  });
+  Negocio(
+      {this.idnegocio,
+      this.nombre,
+      this.descripcion,
+      this.logo,
+      this.horaApertura,
+      this.horaCierre,
+      this.telefono,
+      this.sitioWeb,
+      this.representante,
+      this.idCategoria});
 
   Negocio.fromJsonMap(Map<String, dynamic> json) {
     idnegocio = json["idnegocio"];
@@ -45,6 +46,7 @@ class Negocio {
     telefono = json["telefono"];
     sitioWeb = json["sitioWeb"];
     representante = json["representante"];
+    idCategoria = json["idCategoria"];
   }
 
   getImage() {
