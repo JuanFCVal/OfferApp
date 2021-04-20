@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 class Home extends StatelessWidget {
   final OfertasProvider ofertasProvider = new OfertasProvider();
   final CategoriasProvider categoriasProvider = new CategoriasProvider();
+  final String selected = "";
   @override
   Widget build(context) {
     return Scaffold(
@@ -40,7 +41,7 @@ class Home extends StatelessWidget {
             padding: const EdgeInsets.only(
               top: 150,
             ),
-            child: _swiperTarjetas(),
+            //child: _swiperTarjetas(),
           ),
           Padding(
             //Text Category Selected
@@ -87,23 +88,6 @@ class Home extends StatelessWidget {
           } else {
             return Container(
               margin: EdgeInsets.only(top: 100),
-            );
-          }
-        });
-  }
-
-  Widget _swiperTarjetas() {
-    return FutureBuilder(
-        future: ofertasProvider.getOfertas(),
-        //initialData: [],
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            return CardSwipper(ofertas: snapshot.data);
-          } else {
-            return Center(
-              child: Container(
-                  margin: EdgeInsets.only(top: 100),
-                  child: CircularProgressIndicator()),
             );
           }
         });
