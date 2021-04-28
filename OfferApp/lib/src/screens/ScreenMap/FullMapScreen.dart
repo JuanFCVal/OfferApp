@@ -30,7 +30,7 @@ class _FullMapScreenState extends State<FullMapScreen> {
   bool isButtonVisible;
   var pathParam;
   NegociosProvider _negociosProvider = new NegociosProvider();
-  DetalleNegocio detalleNegocio;
+  detalleNegocio detalleNegocioq;
 
   // Dummy Start and Destination Points
   double startLat = 0;
@@ -68,7 +68,7 @@ class _FullMapScreenState extends State<FullMapScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => DetalleNegocio(
+                            builder: (context) => detalleNegocio(
                                   indexMap: int.parse(dist.negocioIdnegocio),
                                 )));
                   }),

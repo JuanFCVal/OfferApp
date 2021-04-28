@@ -5,14 +5,14 @@ import 'package:OfferApp/src/provider/ofertas_provider.dart';
 
 import 'package:flutter/material.dart';
 
-class DetalleNegocio extends StatelessWidget {
+class detalleNegocio extends StatelessWidget {
   NegociosProvider _negociosProvider = new NegociosProvider();
   OfertasProvider _ofertasProvider = new OfertasProvider();
   int indexMap = 0;
 
   Negocio negocio = new Negocio();
 
-  DetalleNegocio({this.indexMap});
+  detalleNegocio({this.indexMap});
 
   @override
   Widget build(BuildContext context) {
