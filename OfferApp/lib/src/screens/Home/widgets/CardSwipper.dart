@@ -1,11 +1,9 @@
 import 'package:OfferApp/src/model/oferta.dart';
-import 'package:OfferApp/src/provider/negocios_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class CardSwipper extends StatelessWidget {
   final List<Oferta> ofertas;
-  final NegociosProvider _negociosProvider = new NegociosProvider();
 
   CardSwipper({@required this.ofertas});
   @override

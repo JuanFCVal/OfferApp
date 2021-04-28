@@ -16,9 +16,8 @@ class detalleNegocio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int index = ModalRoute.of(context).settings.arguments;
+    int index = ModalRoute.of(context).settings.arguments; //Id de negocio
     index++;
-    print(index);
 
     return Scaffold(
         body: SingleChildScrollView(
@@ -27,7 +26,7 @@ class detalleNegocio extends StatelessWidget {
               Column(
                 children: [
                   _crearData(index),
-                  _crearOfertas(context),
+                  _crearOfertas(context, index),
                 ],
               ),
             ],
@@ -106,9 +105,9 @@ class detalleNegocio extends StatelessWidget {
         });
   }
 
-  _crearOfertas(BuildContext context) {
+  _crearOfertas(BuildContext context, int index) {
     return FutureBuilder(
-      future: _ofertasProvider.getOfertas(),
+      future: _ofertasProvider.getOfertasFromId(index),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           return Container(

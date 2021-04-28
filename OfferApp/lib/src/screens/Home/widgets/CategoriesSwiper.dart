@@ -1,11 +1,15 @@
 import 'package:OfferApp/src/model/categoria.dart';
+import 'package:OfferApp/src/provider/ofertas_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:category_picker/category_picker.dart';
 import 'package:category_picker/category_picker_item.dart';
 
+import 'CardSwipper.dart';
+
 class CategoriesSwiper extends StatelessWidget {
   final List<Categoria> categoria;
   final List<CategoryPickerItem> elementos = [];
+  final OfertasProvider ofertasProvider = new OfertasProvider();
 
   CategoriesSwiper({@required this.categoria});
   @override
@@ -14,6 +18,7 @@ class CategoriesSwiper extends StatelessWidget {
       final card = CategoryPickerItem(
         value: item.getName(),
       );
+
       elementos.add(card);
     }
     return CategoryPicker(
@@ -26,7 +31,23 @@ class CategoriesSwiper extends StatelessWidget {
       itemHeight: 35,
       itemLabelFontSize: 16,
       itemMargin: const EdgeInsets.only(right: 11),
-      onValueChanged: (value) {},
+      onValueChanged: (value) {
+        print(value.value);
+        return FutureBuilder(
+            future: ofertasProvider.getOfertas(),
+            //initialData: [],
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return CardSwipper(ofertas: snapshot.data);
+              } else {
+                return Center(
+                  child: Container(
+                      margin: EdgeInsets.only(top: 100),
+                      child: CircularProgressIndicator()),
+                );
+              }
+            });
+      },
     );
   }
 }
