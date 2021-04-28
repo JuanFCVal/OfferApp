@@ -5,11 +5,15 @@ import 'package:OfferApp/src/provider/ofertas_provider.dart';
 
 import 'package:flutter/material.dart';
 
-class detalleNegocio extends StatelessWidget {
+class DetalleNegocio extends StatelessWidget {
   NegociosProvider _negociosProvider = new NegociosProvider();
   OfertasProvider _ofertasProvider = new OfertasProvider();
+  int indexMap = 0;
 
   Negocio negocio = new Negocio();
+
+  DetalleNegocio({this.indexMap});
+
   @override
   Widget build(BuildContext context) {
     int index = ModalRoute.of(context).settings.arguments;
@@ -48,6 +52,7 @@ class detalleNegocio extends StatelessWidget {
   }
 
   _crearData(int index) {
+    if (indexMap != 0) index = indexMap;
     return FutureBuilder(
         future: _negociosProvider.getNegocioFromID(index),
         builder: (BuildContext context, AsyncSnapshot<Negocio> snapshot) {

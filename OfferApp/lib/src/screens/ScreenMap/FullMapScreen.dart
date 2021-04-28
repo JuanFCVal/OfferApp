@@ -2,6 +2,7 @@ import 'package:OfferApp/src/model/Distancia.dart';
 import 'package:OfferApp/src/model/negocios.dart';
 import 'package:OfferApp/src/provider/Distancia_provider.dart';
 import 'package:OfferApp/src/provider/negocios_provider.dart';
+import 'package:OfferApp/src/screens/DetalleNegocio/detalle.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -29,6 +30,7 @@ class _FullMapScreenState extends State<FullMapScreen> {
   bool isButtonVisible;
   var pathParam;
   NegociosProvider _negociosProvider = new NegociosProvider();
+  DetalleNegocio detalleNegocio;
 
   // Dummy Start and Destination Points
   double startLat = 0;
@@ -62,7 +64,14 @@ class _FullMapScreenState extends State<FullMapScreen> {
               infoWindow: InfoWindow(
                   title: _negocio.nombre,
                   snippet: 'Más información',
-                  onTap: () {}),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetalleNegocio(
+                                  indexMap: int.parse(dist.negocioIdnegocio),
+                                )));
+                  }),
               onTap: () {
                 setState(() {
                   isButtonVisible = true;
