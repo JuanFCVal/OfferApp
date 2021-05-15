@@ -1,6 +1,6 @@
 import 'package:OfferApp/src/provider/categorias_provider.dart';
 import 'package:OfferApp/src/provider/ofertas_provider.dart';
-import 'package:OfferApp/src/screens/Home/widgets/CardSwipper.dart';
+
 import 'package:OfferApp/src/screens/Home/widgets/CategoriesSwiper.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +8,7 @@ class Home extends StatelessWidget {
   final OfertasProvider ofertasProvider = new OfertasProvider();
   final CategoriasProvider categoriasProvider = new CategoriasProvider();
   final String selected = "";
+
   @override
   Widget build(context) {
     return Scaffold(
@@ -41,6 +42,7 @@ class Home extends StatelessWidget {
             padding: const EdgeInsets.only(
               top: 150,
             ),
+
             //child: _swiperTarjetas(),
           ),
           Padding(
@@ -53,6 +55,7 @@ class Home extends StatelessWidget {
           ),
           Padding(
             //SwipperCategorias
+
             padding: const EdgeInsets.only(top: 90, left: 40),
             child: _swiperCategorias(),
           ),

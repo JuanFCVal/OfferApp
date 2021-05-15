@@ -4,8 +4,8 @@ import 'dart:convert';
 
 class NegociosProvider {
   Future<List<Negocio>> getNegocios() async {
-    final url = "https://tryffer-apirest.herokuapp.com";
-    final ur = Uri.http(url, "/negocio");
+    final url = "tryffer-apirest.herokuapp.com";
+    final ur = Uri.https(url, "/negocio");
     final resp = await http.get(ur);
     final decodedData = json.decode(resp.body);
     //print(resp.body);
@@ -14,8 +14,8 @@ class NegociosProvider {
   }
 
   Future<Negocio> getNegocioFromID(int id) async {
-    final url = "https://tryffer-apirest.herokuapp.com";
-    final ur = Uri.http(url, "/negocio/$id");
+    final url = "tryffer-apirest.herokuapp.com";
+    final ur = Uri.https(url, "/negocio/$id");
     final resp = await http.get(ur);
     final decodedData = json.decode(resp.body);
     final negocio = new Negocio.fromJsonMap(decodedData[0]);

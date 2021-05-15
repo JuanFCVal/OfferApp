@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class Ofertas {
-  List<Oferta> items = new List();
+  List<Oferta> items = [];
   Ofertas.fromJsonList(List<dynamic> jsonList) {
     if (jsonList == null) return;
     for (var item in jsonList) {
@@ -17,25 +17,22 @@ class Oferta {
   String fechaFin;
   String nombre;
   String descripcion;
-  String incentivo;
   int repiteSemanal;
   int repiteMensual;
   String productoIdproductos;
   String imagen;
-  String negocioID;
 
-  Oferta(
-      {this.idofertas,
-      this.fechaInicio,
-      this.fechaFin,
-      this.nombre,
-      this.descripcion,
-      this.incentivo,
-      this.repiteSemanal,
-      this.repiteMensual,
-      this.productoIdproductos,
-      this.imagen,
-      this.negocioID});
+  Oferta({
+    this.idofertas,
+    this.fechaInicio,
+    this.fechaFin,
+    this.nombre,
+    this.descripcion,
+    this.repiteSemanal,
+    this.repiteMensual,
+    this.productoIdproductos,
+    this.imagen,
+  });
 
   Oferta.fromJsonMap(Map<String, dynamic> json) {
     idofertas = json["idofertas"];
@@ -43,12 +40,10 @@ class Oferta {
     fechaFin = json["fechaFin"];
     nombre = json["nombre"];
     descripcion = json["descripcion"];
-    incentivo = json["incentivo"];
     repiteSemanal = json["repiteSemanal"];
     repiteMensual = json["repiteMensual"];
     productoIdproductos = json["producto_idproductos"];
     imagen = json["imagen"];
-    negocioID = json["negocioID"];
   }
 
   getImage() {

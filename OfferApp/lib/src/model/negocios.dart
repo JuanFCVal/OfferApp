@@ -2,12 +2,12 @@
 import 'package:flutter/cupertino.dart';
 
 class Negocios {
-  List<Negocio> items = new List();
+  List<Negocio> items = [];
   Negocios.fromJsonList(List<dynamic> jsonList) {
     if (jsonList == null) return;
     for (var item in jsonList) {
       final negocio = new Negocio.fromJsonMap(item);
-      items.add(negocio);
+      items?.add(negocio);
     }
   }
 }
@@ -22,7 +22,7 @@ class Negocio {
   String telefono;
   String sitioWeb;
   String representante;
-  int idCategoria;
+  int idSubCategoria;
 
   Negocio(
       {this.idnegocio,
@@ -34,7 +34,7 @@ class Negocio {
       this.telefono,
       this.sitioWeb,
       this.representante,
-      this.idCategoria});
+      this.idSubCategoria});
 
   Negocio.fromJsonMap(Map<String, dynamic> json) {
     idnegocio = json["idnegocio"];
@@ -46,7 +46,7 @@ class Negocio {
     telefono = json["telefono"];
     sitioWeb = json["sitioWeb"];
     representante = json["representante"];
-    idCategoria = json["idCategoria"];
+    idSubCategoria = json["idSubcategoria"];
   }
 
   getImage() {

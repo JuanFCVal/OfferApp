@@ -4,11 +4,12 @@ import 'dart:convert';
 
 class CategoriasProvider {
   Future<List<Categoria>> getCategorias() async {
-    final url = "https://tryffer-apirest.herokuapp.com";
-    final ur = Uri.http(url, "/categoria");
+    final url = "tryffer-apirest.herokuapp.com";
+    final ur = Uri.https(url, "categoria");
     final resp = await http.get(ur);
     final decodedData = json.decode(resp.body);
-    //print(resp.body);
+    print(resp.body);
+    print("Triying to search");
     final categorias = new Categorias.fromJsonList(decodedData);
     return categorias.items;
   }
