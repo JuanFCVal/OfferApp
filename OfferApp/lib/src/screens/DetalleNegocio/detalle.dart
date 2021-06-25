@@ -12,13 +12,12 @@ class detalleNegocio extends StatelessWidget {
 
   Negocio negocio = new Negocio();
 
-  detalleNegocio({this.indexMap});
+  detalleNegocio({Key key, this.indexMap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     int index = ModalRoute.of(context).settings.arguments; //Id de negocio
-    index++;
-
+    if (indexMap != 0) index = indexMap;
     return Scaffold(
         body: SingleChildScrollView(
           child: Stack(

@@ -14,9 +14,9 @@ class NegociosProvider {
   }
 
   Future<Negocio> getNegocioFromID(int id) async {
-    final url = "https://tryffer-apirest.herokuapp.com";
-    final ur = Uri.http(url, "/negocio/$id");
-    final resp = await http.get(ur);
+    final url = "https://tryffer-apirest.herokuapp.com/negocio/$id";
+    //final ur = Uri.http(url, "/negocio/$id");
+    final resp = await http.get(Uri.parse(url));
     final decodedData = json.decode(resp.body);
     final negocio = new Negocio.fromJsonMap(decodedData[0]);
     return negocio;
