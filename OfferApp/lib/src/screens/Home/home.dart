@@ -13,7 +13,6 @@ class _HomeState extends State<Home> {
   final OfertasProvider ofertasProvider = new OfertasProvider();
 
   final CategoriasProvider categoriasProvider = new CategoriasProvider();
-
   final String selected = "";
   @override
   Widget build(context) {

@@ -68,7 +68,7 @@ class _FullMapScreenState extends State<FullMapScreen> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => detalleNegocio(
-                                indexMap: int.parse(dist.negocioIdnegocio),
+                                indexMap: (dist.negocioIdnegocio),
                               )));
                 }),
             onTap: () {
