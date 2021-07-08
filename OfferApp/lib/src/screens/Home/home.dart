@@ -1,61 +1,40 @@
 import 'package:OfferApp/src/provider/categorias_provider.dart';
 import 'package:OfferApp/src/provider/ofertas_provider.dart';
 import 'package:OfferApp/src/screens/Home/widgets/CardSwipper.dart';
-import 'package:OfferApp/src/screens/Home/widgets/CategoriesSwiper.dart';
+import 'package:OfferApp/src/screens/Home/widgets/CategoryCard.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final OfertasProvider ofertasProvider = new OfertasProvider();
+
   final CategoriasProvider categoriasProvider = new CategoriasProvider();
+
   final String selected = "";
   @override
   Widget build(context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          Column(
-            children: [
-              Expanded(
-                child: Container(
-                  color: Color.fromRGBO(243, 243, 243, 1),
-                  //width: MediaQuery.of(context).size.width,
-                  //height: MediaQuery.of(context).size.height * 0.55,
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  color: Color.fromRGBO(128, 67, 228, 1),
-                ),
-              )
-            ],
+          SizedBox(
+            height: 40,
           ),
           Container(
-            //IconSearchButton
-            margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.8, top: 50),
-            child: IconButton(
-                iconSize: 34, icon: Icon(Icons.search), onPressed: () {}),
+              width: size.width * 1,
+              height: size.height * 0.23,
+              child: _CardCategorias()),
+          SizedBox(height: 30),
+          Text(
+            "Sugerencias para ti",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          Padding(
-            //SwipperTarjetas
-            padding: const EdgeInsets.only(
-              top: 150,
-            ),
-            //child: _swiperTarjetas(),
-          ),
-          Padding(
-            //Text Category Selected
-            padding: const EdgeInsets.only(top: 180, left: 50),
-            child: Text(
-              "Recomendaciones",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            //SwipperCategorias
-            padding: const EdgeInsets.only(top: 90, left: 40),
-            child: _swiperCategorias(),
-          ),
+          Container(margin: EdgeInsets.only(top: 20), child: _swiperTarjetas()),
         ],
       ),
       floatingActionButton: Padding(
@@ -79,15 +58,31 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget _swiperCategorias() {
+  Widget _CardCategorias() {
     return FutureBuilder(
         future: categoriasProvider.getCategorias(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            return CategoriesSwiper(categoria: snapshot.data);
+            return CategoryCards(categorias: snapshot.data);
           } else {
             return Container(
               margin: EdgeInsets.only(top: 100),
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
+  }
+
+  Widget _swiperTarjetas() {
+    return FutureBuilder(
+        future: ofertasProvider.getOfertas(),
+        //initialData: [],
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            return CardSwipper(ofertas: snapshot.data);
+          } else {
+            return Center(
+              child: Container(child: CircularProgressIndicator()),
             );
           }
         });

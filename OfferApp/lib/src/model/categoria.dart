@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 
 class Categorias {
-  List<Categoria> items = new List();
+  List<Categoria> items = [];
   Categorias.fromJsonList(List<dynamic> jsonList) {
     if (jsonList == null) return;
     for (var item in jsonList) {
