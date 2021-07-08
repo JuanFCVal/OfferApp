@@ -64,12 +64,7 @@ class _FullMapScreenState extends State<FullMapScreen> {
                 title: _negocio.nombre,
                 snippet: 'Más información',
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => detalleNegocio(
-                                indexMap: (dist.negocioIdnegocio),
-                              )));
+                  Navigator.pushNamed(context, "detalle", arguments: negocio);
                 }),
             onTap: () {
               setState(() {

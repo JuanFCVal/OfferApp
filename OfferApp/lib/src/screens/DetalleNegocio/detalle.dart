@@ -24,8 +24,6 @@ class _detalleNegocioState extends State<detalleNegocio> {
   @override
   Widget build(BuildContext context) {
     Negocio bussines = ModalRoute.of(context).settings.arguments;
-
-    //  if ((widget.indexMap) != '0') bussines.idnegocio = widget.indexMap;
     return Scaffold(
         body: CustomScrollView(
       slivers: [
