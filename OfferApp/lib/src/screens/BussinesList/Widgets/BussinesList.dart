@@ -46,6 +46,9 @@ class BussinesItem extends StatelessWidget {
           Expanded(
               child: InkWell(
             onTap: () {
+              print(bussines.descripcion);
+              print(bussines.idnegocio);
+              print(bussines.nombre);
               Navigator.pushNamed(context, "detalle", arguments: bussines);
             },
             child: ClipOval(

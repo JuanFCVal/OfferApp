@@ -43,7 +43,8 @@ class businessCards extends StatelessWidget {
 
   Widget _BussinesList(Categoria index) {
     NegociosProvider negociosProvider = new NegociosProvider();
-    print(index);
+    print(("El index es"));
+    print((index.idcategoria));
     return FutureBuilder(
         future: negociosProvider.getNegociosFromCategory(index.idcategoria),
         //initialData: [],

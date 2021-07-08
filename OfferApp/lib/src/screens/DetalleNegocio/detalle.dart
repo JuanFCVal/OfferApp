@@ -9,36 +9,23 @@ import 'package:OfferApp/src/provider/products_provider.dart';
 import 'package:flutter/material.dart';
 
 class detalleNegocio extends StatefulWidget {
-  int indexMap = 0;
-
-
-  detalleNegocio({this.indexMap});
-
+  String indexMap = "";
+  detalleNegocio({Key key, this.indexMap}) : super(key: key);
   @override
   _detalleNegocioState createState() => _detalleNegocioState();
 }
 
 class _detalleNegocioState extends State<detalleNegocio> {
   final _pageProductsController = PageController(viewportFraction: 0.60);
-
   OfertasProvider _ofertasProvider = new OfertasProvider();
   ProductosProvider _productosProvider = new ProductosProvider();
-
   Negocio negocio = new Negocio();
 
   @override
   Widget build(BuildContext context) {
     Negocio bussines = ModalRoute.of(context).settings.arguments;
 
-  Negocio negocio = new Negocio();
-
-  detalleNegocio({Key key, this.indexMap}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    int index = ModalRoute.of(context).settings.arguments; //Id de negocio
-    if (indexMap != 0) index = indexMap;
-
+    //  if ((widget.indexMap) != '0') bussines.idnegocio = widget.indexMap;
     return Scaffold(
         body: CustomScrollView(
       slivers: [
