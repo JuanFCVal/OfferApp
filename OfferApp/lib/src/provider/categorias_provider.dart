@@ -8,8 +8,6 @@ class CategoriasProvider {
     final ur = Uri.https(url, "categoria");
     final resp = await http.get(ur);
     final decodedData = json.decode(resp.body);
-    print(resp.body);
-    print("Triying to search");
     final categorias = new Categorias.fromJsonList(decodedData);
     return categorias.items;
   }

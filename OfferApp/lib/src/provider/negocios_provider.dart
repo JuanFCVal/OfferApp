@@ -8,7 +8,6 @@ class NegociosProvider {
     final ur = Uri.https(url, "/negocio");
     final resp = await http.get(ur);
     final decodedData = json.decode(resp.body);
-    //print(resp.body);
     final negocios = new Negocios.fromJsonList(decodedData);
     return negocios.items;
   }
@@ -20,5 +19,14 @@ class NegociosProvider {
     final decodedData = json.decode(resp.body);
     final negocio = new Negocio.fromJsonMap(decodedData[0]);
     return negocio;
+  }
+
+  Future<List<Negocio>> getNegociosFromCategory(int id) async {
+    final url = "tryffer-apirest.herokuapp.com";
+    final ur = Uri.https(url, "/categoria/negocio/$id");
+    final resp = await http.get(ur);
+    final decodedData = json.decode(resp.body);
+    final negocios = new Negocios.fromJsonList(decodedData);
+    return negocios.items;
   }
 }
