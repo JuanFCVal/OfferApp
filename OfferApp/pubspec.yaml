@@ -32,7 +32,7 @@ dependencies:
   flutter_swiper: ^1.1.6 
   category_picker: ^1.0.1
   geolocator: ^7.0.3
-  google_maps_flutter: ^2.0.3
+  google_maps_flutter: ^2.0.6
   google_maps_webservice: ^0.0.20-nullsafety.4
   provider: ^5.0.0
 

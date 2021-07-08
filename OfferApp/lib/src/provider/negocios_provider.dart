@@ -13,6 +13,7 @@ class NegociosProvider {
   }
 
   Future<Negocio> getNegocioFromID(int id) async {
+
     final url = "tryffer-apirest.herokuapp.com";
     final ur = Uri.https(url, "/negocio/$id");
     final resp = await http.get(ur);

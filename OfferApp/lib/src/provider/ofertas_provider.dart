@@ -4,9 +4,11 @@ import 'dart:convert';
 
 class OfertasProvider {
   Future<List<Oferta>> getOfertas() async {
+
     final url = "tryffer-apirest.herokuapp.com";
     final ur = Uri.https(url, "oferta");
     final resp = await http.get(ur);
+
     final decodedData = json.decode(resp.body);
     //print(resp.body);
     final ofertas = new Ofertas.fromJsonList(decodedData);

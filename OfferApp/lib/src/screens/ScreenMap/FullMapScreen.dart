@@ -51,39 +51,37 @@ class _FullMapScreenState extends State<FullMapScreen> {
 
   void setMarkers() async {
     for (int i = 0; i < _geoloc.length; i++) {
-      if (_geoloc.isNotEmpty) {
-        Distancia dist = _geoloc[i];
-        _negociosProvider
-            .getNegocioFromID(int.parse(dist.negocioIdnegocio))
-            .then((negocio) {
-          setState(() {
-            _negocio = negocio;
-            markers.add(Marker(
-              markerId: MarkerId(dist.idubicacion.toString()),
-              position: LatLng(dist.latitud, dist.longitud),
-              infoWindow: InfoWindow(
-                  title: _negocio.nombre,
-                  snippet: 'Más información',
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => detalleNegocio(
-                                  indexMap: int.parse(dist.negocioIdnegocio),
-                                )));
-                  }),
-              onTap: () {
-                setState(() {
-                  isButtonVisible = true;
-                  endLat = dist.latitud;
-                  endLng = dist.longitud;
-                });
-              },
-            ));
-          });
+      Distancia dist = _geoloc[i];
+      _negociosProvider
+          .getNegocioFromID(int.parse(dist.negocioIdnegocio))
+          .then((negocio) {
+        setState(() {
+          _negocio = negocio;
+          markers.add(Marker(
+            markerId: MarkerId(dist.idubicacion.toString()),
+            position: LatLng(dist.latitud, dist.longitud),
+            infoWindow: InfoWindow(
+                title: _negocio.nombre,
+                snippet: 'Más información',
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => detalleNegocio(
+                                indexMap: int.parse(dist.negocioIdnegocio),
+                              )));
+                }),
+            onTap: () {
+              setState(() {
+                isButtonVisible = true;
+                endLat = dist.latitud;
+                endLng = dist.longitud;
+              });
+            },
+          ));
         });
-        setState(() {});
-      }
+      });
+      setState(() {});
     }
   }
 
@@ -185,6 +183,7 @@ class _FullMapScreenState extends State<FullMapScreen> {
     DistanciaProvider.getLatlng().then((geoloc) {
       setState(() {
         _geoloc = geoloc;
+        setMarkers();
       });
     });
     getCurrentLocation();
@@ -382,31 +381,26 @@ class _FullMapScreenState extends State<FullMapScreen> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text(
-                            'Lugares de compra',
-                            style: TextStyle(fontSize: 20.0),
-                          ),
-                          SizedBox(height: 10),
-                          Visibility(
-                            visible: isVisible,
-                            child: Text(
+                      child: Visibility(
+                        visible: isVisible,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Text(
+                              'Ruta de llegada',
+                              style: TextStyle(
+                                  fontSize: 25.0, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
                               'MEDIO: $medio\nDISTANCIA: $distancia km\nDURACIÓN: $tiempo mins $cociente seg',
                               style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                          ),
-                          SizedBox(height: 5),
-                          ElevatedButton(
-                              onPressed: () {
-                                setMarkers();
-                              },
-                              child: Text('Click aquí para ver lugares')),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -418,8 +412,6 @@ class _FullMapScreenState extends State<FullMapScreen> {
       ),
     );
   }
-
-  botonesFlotanteSobreMapa() {}
 }
 
 class LineString {

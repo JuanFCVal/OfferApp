@@ -16,9 +16,9 @@ class NetworkHelper {
   final double endLat;
 
   Future getData() async {
-    var ur = Uri.http(url,
-        '/v2/directions/$pathParam?api_key=$apiKey&start=$startLng,$startLat&end=$endLng,$endLat');
-    http.Response response = await http.get(ur);
+    var ur = url +
+        '/v2/directions/$pathParam?api_key=$apiKey&start=$startLng,$startLat&end=$endLng,$endLat';
+    http.Response response = await http.get(Uri.parse(ur));
 
     if (response.statusCode == 200) {
       String data = response.body;

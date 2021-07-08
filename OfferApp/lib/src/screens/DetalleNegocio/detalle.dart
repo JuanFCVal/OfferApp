@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 class detalleNegocio extends StatefulWidget {
   int indexMap = 0;
 
+
   detalleNegocio({this.indexMap});
 
   @override
@@ -28,6 +29,16 @@ class _detalleNegocioState extends State<detalleNegocio> {
   @override
   Widget build(BuildContext context) {
     Negocio bussines = ModalRoute.of(context).settings.arguments;
+
+  Negocio negocio = new Negocio();
+
+  detalleNegocio({Key key, this.indexMap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    int index = ModalRoute.of(context).settings.arguments; //Id de negocio
+    if (indexMap != 0) index = indexMap;
+
     return Scaffold(
         body: CustomScrollView(
       slivers: [
