@@ -2,6 +2,10 @@ import 'package:OfferApp/src/provider/categorias_provider.dart';
 import 'package:OfferApp/src/provider/ofertas_provider.dart';
 import 'package:OfferApp/src/screens/Home/widgets/CardSwipper.dart';
 import 'package:OfferApp/src/screens/Home/widgets/CategoryCard.dart';
+import 'package:OfferApp/src/screens/ProfielPage/profile.dart';
+import 'package:OfferApp/src/screens/ScreenMap/FullMapScreen.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -19,45 +23,30 @@ class _HomeState extends State<Home> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(
-            height: 40,
-          ),
-          Container(
-              width: size.width * 1,
-              height: size.height * 0.23,
-              child: _CardCategorias()),
-          SizedBox(height: 30),
-          Text(
-            "Sugerencias para ti",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          Container(margin: EdgeInsets.only(top: 20), child: _swiperTarjetas()),
-        ],
-      ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 25, right: 15),
-        child: Container(
-          height: 60,
-          width: 60,
-          child: FloatingActionButton(
-            onPressed: () {
-              Navigator.pushNamed(context, "mapa");
-            },
-            backgroundColor: Color.fromRGBO(241, 235, 90, 1),
-            elevation: 10,
-            child: Icon(
-              Icons.map,
-              color: Color.fromRGBO(89, 214, 58, 1),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 30,
             ),
-          ),
+            Container(
+                width: size.width * 1,
+                height: size.height * 0.23,
+                child: _cardcategorias()),
+            SizedBox(height: 10),
+            Text(
+              "Sugerencias para ti",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Container(
+                margin: EdgeInsets.only(top: 10), child: _swiperTarjetas()),
+          ],
         ),
       ),
     );
   }
 
-  Widget _CardCategorias() {
+  Widget _cardcategorias() {
     return FutureBuilder(
         future: categoriasProvider.getCategorias(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
