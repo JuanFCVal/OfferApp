@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'Widgets/Input_text.dart';
 import 'Widgets/Login-Button.dart';
 import 'Widgets/TryfferLogo.dart';
@@ -73,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Positioned(
                 top: MediaQuery.of(context).size.height * 0.75,
                 left: MediaQuery.of(context).size.width / 5,
-                child: FlatButton(
+                child: TextButton(
                     onPressed: () {},
                     child: Text(
                       "No tienes cuenta? Registrate aquí",
