@@ -35,6 +35,8 @@ dependencies:
   google_maps_webservice: ^0.0.20-nullsafety.4
   provider: ^5.0.0
   curved_navigation_bar: ^1.0.1
+  firebase_auth: 
+  cloud_firestore: 
 
 dev_dependencies:
   flutter_test:

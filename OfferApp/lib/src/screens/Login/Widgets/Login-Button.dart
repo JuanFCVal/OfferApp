@@ -29,9 +29,8 @@ class _ButtonGreenState extends State<ButtonGreen> {
           borderRadius: BorderRadius.circular(30.0),
           boxShadow: [
             BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 1),
-                blurRadius: 1.0,
-                offset: Offset(0, 3)),
+              color: Colors.blue[600],
+            ),
           ],
           /*gradient: LinearGradient(
                 colors: [

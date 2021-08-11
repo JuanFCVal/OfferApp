@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Tryffer',
-      initialRoute: 'bottom',
+      initialRoute: 'login',
       routes: getApplicationRoutes(),
     );
     //home: new BottomNavigation(),
