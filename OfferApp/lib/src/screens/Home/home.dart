@@ -4,6 +4,7 @@ import 'package:OfferApp/src/screens/Home/widgets/CardSwipper.dart';
 import 'package:OfferApp/src/screens/Home/widgets/CategoryCard.dart';
 import 'package:OfferApp/src/screens/ProfielPage/profile.dart';
 import 'package:OfferApp/src/screens/ScreenMap/FullMapScreen.dart';
+import 'package:OfferApp/src/services/auth.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class _HomeState extends State<Home> {
   final String selected = "";
   @override
   Widget build(context) {
+    final AuthService _auth = AuthService();
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -40,6 +42,11 @@ class _HomeState extends State<Home> {
             ),
             Container(
                 margin: EdgeInsets.only(top: 10), child: _swiperTarjetas()),
+            /* ElevatedButton(
+                onPressed: () async {
+                  await _auth.signOut();
+                },
+                child: Text('Salir')) */
           ],
         ),
       ),

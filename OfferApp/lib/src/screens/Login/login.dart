@@ -1,6 +1,6 @@
+import 'package:OfferApp/src/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'Widgets/Input_text.dart';
-import 'Widgets/Login-Button.dart';
 import 'Widgets/TryfferLogo.dart';
 import 'Widgets/google-facebook-button.dart';
 
@@ -10,6 +10,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,14 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 30,
             ),
             InputText(),
-            ButtonGreen(
-              text: "Login",
-              onPressed: () {
-                Navigator.pushNamed(context, "home");
-              },
-              width: MediaQuery.of(context).size.width * 0.7,
-              height: MediaQuery.of(context).size.height * 0.06,
-            ),
             SizedBox(
               height: 20,
             ),
@@ -58,7 +51,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     SocialNetworkButtonLogin(
                       colors: Color.fromRGBO(227, 65, 51, 1),
                       image: "assets/img/logos/logogoogle.png",
-                      onPressed: () {},
+                      onPressed: () {
+                        _auth.signInWithGoogle();
+                      },
                       width: (MediaQuery.of(context).size.width * 0.7) * 0.45,
                       height: MediaQuery.of(context).size.height * 0.06,
                     ),
@@ -72,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Navigator.pushNamed(context, "register");
                 },
                 child: Text(
-                  "No tienes cuenta? Registrate aquí",
+                  "¿No tienes cuenta? Registrate aquí",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )),
           ],
