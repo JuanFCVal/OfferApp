@@ -64,7 +64,7 @@ class _FullMapScreenState extends State<FullMapScreen> {
                 title: _negocio.nombre,
                 snippet: 'Más información',
                 onTap: () {
-                  Navigator.pushNamed(context, "detalle", arguments: negocio);
+                  Navigator.pushNamed(context, "detalle", arguments: _negocio);
                 }),
             onTap: () {
               setState(() {
