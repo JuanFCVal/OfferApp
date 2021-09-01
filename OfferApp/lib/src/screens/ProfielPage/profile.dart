@@ -1,86 +1,204 @@
+import 'package:OfferApp/src/model/categoria.dart';
+import 'package:OfferApp/src/provider/categorias_provider.dart';
 import 'package:OfferApp/src/screens/Home/widgets/CategoryCard.dart';
+import 'package:OfferApp/src/services/FirebaseStorage.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  List<Categoria> categoriasDisp = [];
+  final String email =
+      "userejemplo"; //valor con el que se va a buscar la info del usuario
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final categoryProv = Provider.of<CategoriasProvider>(context);
     final _size = MediaQuery.of(context).size;
-    final userPhoto = Container(
-      height: _size.height * 0.3,
-      margin: EdgeInsets.only(right: 20.0),
-      decoration: BoxDecoration(
-          border: Border.all(
-              color: Colors.white, width: 2.0, style: BorderStyle.solid),
-          shape: BoxShape.circle,
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(
-                  "https://laboratoriosniam.com/wp-content/uploads/2018/07/michael-dam-258165-unsplash_WEB2.jpg"))),
-    );
+    // Show error message if initialization failed
+    CollectionReference users = firestore.collection('users');
 
-    final userInfo = Column(
-      children: <Widget>[
-        Container(
-            margin: EdgeInsets.only(bottom: 5.0),
-            child: Text("Ejemplo de Nombre",
-                style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ))),
-        Text("cevallosjuanfrancisco@gmail.com",
-            style: TextStyle(
-              fontSize: 15.0,
-              color: Colors.white60,
-            )),
-      ],
-    );
+    return FutureBuilder(
+      future: users.doc(email).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (snapshot.hasError) {
+          return Text("Something went wrong");
+        }
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              color: Colors.blue[400],
+        if (snapshot.hasData && !snapshot.data.exists) {
+          return Text("Document does not exist");
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data =
+              snapshot.data.data() as Map<String, dynamic>;
+
+          return SingleChildScrollView(
+            child: SafeArea(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 30,
+                  Stack(
+                    children: [
+                      Container(
+                          height: _size.height * 0.45, color: Colors.red[100]),
+                      Positioned(
+                        right: 0,
+                        child: IconButton(
+                            icon: Icon(
+                              Icons.edit,
+                              color: Colors.black,
+                            ),
+                            onPressed: () {}),
+                      ),
+                      Center(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 20,
+                            ),
+                            FutureBuilder(
+                              future: _getImage(context, "asdbl1kmds.jpg"),
+                              builder: (BuildContext context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                                if (snapshot.hasError) {
+                                  return Text("Something went wrong");
+                                }
+                                return Container(
+                                  height: _size.height * 0.25,
+                                  width: _size.width * 0.5,
+                                  child: CircleAvatar(
+                                    backgroundImage:
+                                        NetworkImage(snapshot.data),
+                                  ),
+                                );
+                              },
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text("${data['nombres']} ${data['apellidos']}",
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                )),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text("${data['correo']}",
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Colors.black,
+                                )),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text("${data['usuario']}",
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Colors.black,
+                                )),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  userPhoto,
                   SizedBox(
                     height: 20,
                   ),
-                  userInfo,
+                  Text("Mis categorias favoritas",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      )),
                   SizedBox(
                     height: 20,
+                  ),
+                  Container(
+                    height: _size.height * 0.25,
+                    child: _getCategoryData(
+                        data['categorias'], categoryProv.categoriasDisponbles),
+                  ),
+                  Container(
+                    height: _size.height * 0.25,
+                    child: CategoryCards(categorias: this.categoriasDisp),
                   )
+
+                  /*Container(
+                    color: Colors.amber,
+                    height: _size.height * 0.5,
+                    child: ListView.builder(
+                      itemCount: data['categoriasPreferidas'].length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CategoryCards(
+                            categorias: _getCategoryData(
+                                data['categoriasPreferidas'],
+                                categoryProv.categoriasDisponbles));
+                      },
+                    ),
+                 ), */
                 ],
               ),
             ),
-            Container(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                    child: Text("Mis preferencias",
-                        style: TextStyle(
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.black,
-                        )),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+          );
+        }
+
+        return Text("loading");
+      },
     );
+  }
+
+  Future _getImage(BuildContext context, String imgName) async {
+    Image image;
+    String link;
+    await FirebaseStorageService.loadImage(context, imgName).then((value) {
+      link = value.toString();
+      image = Image.network(
+        value.toString(),
+      );
+    });
+    return link;
+  }
+
+  Widget _getCategoryData(
+      categoriasPreferidas, List<Categoria> categoriasDisponibles) {
+    List<Categoria> categoriasPrefe = [];
+    for (var item in categoriasPreferidas) {
+      for (var catdisp in categoriasDisponibles) {
+        if (item == catdisp.idcategoria.toString()) {
+          categoriasPrefe.add(catdisp);
+        }
+      }
+    }
+    categoriasDisponibles.forEach((element) {
+      if (!categoriasPrefe.contains(element)) {
+        this.categoriasDisp.add(element);
+      }
+    });
+    this.categoriasDisp = this.categoriasDisp.toSet().toList();
+    return CategoryCards(categorias: categoriasPrefe);
   }
 }

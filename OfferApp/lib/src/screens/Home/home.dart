@@ -8,6 +8,7 @@ import 'package:OfferApp/src/services/auth.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -17,12 +18,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final OfertasProvider ofertasProvider = new OfertasProvider();
 
-  final CategoriasProvider categoriasProvider = new CategoriasProvider();
   final String selected = "";
   @override
   Widget build(context) {
     final AuthService _auth = AuthService();
     final size = MediaQuery.of(context).size;
+    final categoryProv = Provider.of<CategoriasProvider>(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -34,7 +35,8 @@ class _HomeState extends State<Home> {
             Container(
                 width: size.width * 1,
                 height: size.height * 0.23,
-                child: _cardcategorias()),
+                child: CategoryCards(
+                    categorias: categoryProv.categoriasDisponbles)),
             SizedBox(height: 10),
             Text(
               "Sugerencias para ti",
@@ -53,9 +55,9 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _cardcategorias() {
+  /*Widget _cardcategorias() {
     return FutureBuilder(
-        future: categoriasProvider.getCategorias(),
+        future: categoryProv.categoriasDisponbles,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return CategoryCards(categorias: snapshot.data);
@@ -67,7 +69,7 @@ class _HomeState extends State<Home> {
           }
         });
   }
-
+*/
   Widget _swiperTarjetas() {
     return FutureBuilder(
         future: ofertasProvider.getOfertas(),

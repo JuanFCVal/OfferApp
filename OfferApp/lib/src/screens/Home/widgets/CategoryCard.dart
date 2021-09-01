@@ -4,10 +4,18 @@ import 'package:flutter/material.dart';
 class CategoryCards extends StatelessWidget {
   final List<Categoria> categorias;
   final List<Widget> elementos = [];
+
   CategoryCards({@required this.categorias});
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    if (this.categorias.length == 0) {
+      return Container(
+        width: size.width * 0.65,
+        height: size.height * 0.5,
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
     for (var item in categorias) {
       final card = Container(
         padding: EdgeInsets.all(3),
