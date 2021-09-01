@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ButtonGreen(
               text: "Login",
               onPressed: () {
-                Navigator.pushNamed(context, "home");
+                Navigator.pushNamed(context, "bottom");
               },
               width: MediaQuery.of(context).size.width * 0.7,
               height: MediaQuery.of(context).size.height * 0.06,
