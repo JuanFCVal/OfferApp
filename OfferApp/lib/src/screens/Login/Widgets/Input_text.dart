@@ -72,7 +72,7 @@ class _InputTextState extends State<InputText> {
                                   'El email y/o la contraseña son incorrectos';
                             });
                           } else {
-                            Navigator.pushNamed(context, "home");
+                            Navigator.pushNamed(context, "bottom");
                           }
                         }
                       },
